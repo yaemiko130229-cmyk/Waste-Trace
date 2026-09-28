@@ -23,26 +23,3 @@ infra/         Docker Compose、MySQL 初始化脚本、环境变量示例
 docs/          环境说明、接口清单、联调说明
 scripts/       Windows 启停和环境检查脚本
 ```
-
-## 本机已完成
-
-- 已生成全部项目文件和配置模板。
-- 已建立 `backend/.venv` Python 3.12 虚拟环境。
-- 已安装后端基础依赖：FastAPI、Uvicorn、SQLAlchemy、PyMySQL、Redis、JWT、pytest、ruff。
-- 已安装管理端 npm 依赖并生成 `admin-web/package-lock.json`。
-- 已生成后端 `.env` 本地开发配置（仅占位值，不可用于生产）。
-
-## 启动顺序（当前电脑可直接使用的本地模式）
-
-1. 双击或在 PowerShell 执行：`scripts\start_backend.ps1`（SQLite、本地文件存储、mock 存证，不依赖 Docker）。
-2. 另开 PowerShell 执行：`scripts\start_admin.ps1`。
-3. 后端文档：`http://127.0.0.1:8000/docs`；管理端：`http://127.0.0.1:5173`。
-4. 微信小程序：使用微信开发者工具打开 `miniprogram`，将接口地址配置为 `http://127.0.0.1:8000/api`。
-
-## 生产/容器模式
-
-安装 Docker Desktop 并启动 Docker Engine 后，在本目录执行：`docker compose -f infra/docker-compose.yml up -d mysql redis minio`。然后将 `backend/.env` 的数据库、Redis 和对象存储配置改回容器地址；区块链仍需配置真实 BaaS 凭证。
-
-## 账号和密钥说明
-
-`.env.example` 和 `infra/.env.example` 只包含本地开发占位值。真实微信 AppID、云服务器、OSS、BaaS、JWT 密钥不得提交到公共仓库。
